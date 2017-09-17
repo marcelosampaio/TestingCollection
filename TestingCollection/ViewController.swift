@@ -8,18 +8,47 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    // MARK: - Outlets
+
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    
+    // MARK: - Properties
+    let cellIdentifier = "Cell"
+    let images = [UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card"),UIImage(named:"card")]
+    
+
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
+    // MARK: - UICollectionView Delegate
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CustomCollectionViewCell
+        
+        
+        cell.cellImageView.image = images[indexPath.row]
+        
+        return cell
+    }
+    
+
+    
+    
+    
 
 }
 
